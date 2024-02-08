@@ -1,0 +1,12 @@
+---
+import Html from "@/layouts/LayoutHTML.astro";
+import FramePage from "@/layouts/FramePage.astro";
+import ConstructorGame from "@/components/react/ConstructorGame";
+---
+<Html title="Tic Tac Toe SP">
+    <FramePage>
+        <div class="m-5 overflow-auto">
+            <ConstructorGame client:only="react"/>
+        </div>
+    </FramePage>
+</Html>

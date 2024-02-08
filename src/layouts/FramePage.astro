@@ -1,0 +1,70 @@
+---
+import { goals, linkedIn, email, repoGithub } from "@/assets/ts/constants";
+---
+
+<nav
+    transition:name="nav"
+    transition:animate="slide"
+    class="navbar sticky top-0 w-full h-[10dvh] z-20 shadow-lg bg-base-100 *:text-black justify-between lg:justify-around"
+>
+    {
+        Astro.url.pathname !== "/" && (
+            <button
+                onclick="window.history.back();"
+                id="toBack"
+                class="btn btn-ghost flex justify-center items-center size-12 p-2 text-3xl"
+            >
+                &larr;
+            </button>
+        )
+    }
+    <a draggable="false" href="/" title="Tic Tac Toe World">
+        {/* hacer que se le pueda cambiar el color al stroke */}
+        <img
+            draggable="false"
+            src="/favicon.svg"
+            class="btn btn-ghost size-12 p-1 text-base-content stroke-current"
+            alt="Tic Tac Toe World"
+        />
+    </a>
+    {/* TODO: make the mobile version */}
+    {/* TODO: when there are more internal pages, only put those */}
+    <ul
+        class="overflow-x-auto *:*:btn *:*:btn-ghost
+        *:*:text-base-content *:*:uppercase"
+    >
+        <li><a href="/play">prueba una partida</a></li>
+        <li>
+            <a href={goals} target="_blank" rel="noopener noreferrer">metas</a>
+        </li>
+        <li>
+            <a href={repoGithub} target="_blank" rel="noopener noreferrer">repositorio</a>
+        </li>
+    </ul>
+</nav>
+<main class="flex flex-col justify-between min-h-[90dvh]">
+    <slot />
+    {/* Footer */}
+    <footer
+        class="flex flex-col-reverse lg:flex-row justify-center lg:justify-evenly items-center p-4"
+    >
+        <h3 class="text-base-content opacity-75">
+            © {new Date().getFullYear()} Famá Román
+        </h3>
+        <div
+            class="flex flex-wrap gap-1 justify-center *:btn *:btn-ghost *:link *:size-fit *:opacity-75"
+        >
+            <a href={linkedIn} target="_blank" rel="noopener noreferrer"
+                >Linkedin: <br /> Román Famá</a
+            >
+            <a
+            href={"mailto:" + email}
+            target="_blank"
+            rel="noopener noreferrer">Email: <br /> {email}</a
+            >
+            <a href={repoGithub} target="_blank" rel="noopener noreferrer"
+                >Repositorio: <br /> tic-tac-toe-world</a
+            >
+        </div>
+    </footer>
+</main>

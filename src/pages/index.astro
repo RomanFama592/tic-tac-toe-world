@@ -1,0 +1,150 @@
+---
+import AnimBoard from "@/components/react/AnimBoard";
+import SectionCardWithAnimBoard from "@/components/astro/SectionCardWithAnimBoard.astro";
+import Html from "@/layouts/LayoutHTML.astro";
+import FramePage from "@/layouts/FramePage.astro";
+import {
+	boardSmileFace,
+	boardThatToMakeItDifferent,
+	boardContributions,
+} from "@/assets/ts/anims-boards";
+import {
+	goals,
+	nameRepoGithub,
+	repoGithub,
+	usernameGithub,
+} from "@/assets/ts/constants";
+import type { BoardType } from "@/assets/types/types";
+
+interface ISections {
+	[pages: string]: {
+		title: string;
+		paragraph: string;
+		board: BoardType[];
+		extrasHTML?: string;
+	};
+}
+
+// IMPORTANT: no cambiar props names ya que se usan como identificador par alas transiciones entre paginas
+export const sections: ISections = {
+	thatToMakeItDifferent: {
+		title: "¿Que lo hace distinto?",
+		paragraph: `Este proyecto redefine el clásico juego de Tic Tac Toe, ofreciéndote una experiencia personalizada desde el primer momento.
+		<br/>
+		¿Te imaginas jugar con hasta 4 jugadores en tableros de hasta 7x7? ¡Ahora es posible! Además, tienes la libertad de elegir el número de conexiones necesarias para ganar y hasta puedes concatenar líneas para poder hacer combos, una característica que promete tener aún más relevancia en el futuro.
+		<br/>
+		Aunque actualmente nos enfocamos en estas modalidades basadas en el clásico juego, nuestro compromiso es seguir ampliando la diversión. A medida que cumplamos nuestras metas establecidas introduciremos novedosos y emocionantes modos de juego nunca antes vistos.
+		<br/>
+		¡Mantente atento a las próximas actualizaciones para descubrir nuevas formas de disfrutar de este clásico reinventado!`,
+		board: boardThatToMakeItDifferent,
+		extrasHTML: `<a 
+		href="${goals}" 
+		target="_blank"
+		class="link"
+		rel="noopener noreferrer">
+		...Ver mas sobre las metas
+		</a>`,
+	},
+	/* TODO: end the short paragraph and the page */
+	/* challengesToOvercome: {
+		title: "Retos que tuve que superar",
+		paragraph: `Este Proyecto no fue tan sencillo, tuvo sus retos y complicaciones, a nivel logico, retos de escalabilidad `,
+		board: board7x7Empty,
+		extrasHTML: `
+		<a 
+		href="/challenges"
+		class="link">
+			...see more
+		</a>`,
+	}, */
+	contributions: {
+		title: "¿Se puede contribuir al proyecto?",
+		paragraph: `Toda ayuda es bienvenida y agradecida, si estas interesado poder visitar nuestro 
+		<a href="${repoGithub}" class="link" target="_blank" rel="noopener noreferrer">repositorio</a>
+		para saber mas sobre como contribuir en este proyecto.`,
+		board: boardContributions,
+		extrasHTML: `
+		<div class="flex flex-col gap-4 max-w-96">
+			<h3 class="font-semibold text-xl">Mencion a los contribuidores</h3>
+			<a href="${repoGithub}/graphs/contributors" target="_blank" rel="noopener noreferrer">
+				<img src="https://contrib.rocks/image?repo=${usernameGithub}/${nameRepoGithub}" alt="contributors" />
+			</a>
+		</div>
+		`,
+	},
+};
+---
+
+<Html title="Welcome to Tic Tac Toe World." description="">
+	<FramePage>
+		{/* Header */}
+		<header
+			class="flex flex-col lg:flex-row
+				gap-2 size-full p-3 lg:p-16
+				items-center justify-between"
+		>
+			<div
+				class="flex flex-col justify-between rounded-box mt-5
+					 lg:size-fit max-lg:w-full text-center max-lg:h-[90dvh] lg:mb-auto
+					 items-center lg:items-start"
+			>
+				<div
+					class="flex flex-col gap-8 lg:text-left items-center lg:items-start size-full"
+				>
+					<h1
+						class="text-5xl text-pretty font-bold hover:text-shadow-insite hover:shadow-current"
+					>
+						¡Bienvenido a Tic Tac Toe World!
+					</h1>
+					<p
+						class="m-3
+							text-pretty font-semibold max-lg:rounded-md
+							lg:max-w-[35dvw] max-lg:max-h-52
+							max-lg:bg-base-200 max-lg:p-2
+							overflow-auto size-fit"
+					>
+						<b
+							>¿Estás listo para darle un giro emocionante al
+							clásico Tic Tac Toe?</b
+						>
+						<br /><br /> Te presento mi Proyecto Open Source de Tic Tac
+						Toe, una versión avanzada y personalizable de este juego
+						tan querido. Sumérgete en una experiencia de juego única,
+						donde cada partida es una nueva aventura. ¡Comienza a jugar
+						ahora y descubre la emoción de jugar a Tic Tac Toe de una
+						manera totalmente diferente!
+					</p>
+				</div>
+				<a href="/play" class="btn btn-primary mx-3 my-10 size-fit"
+					>¡Juega Ahora!</a
+				>
+			</div>
+			<div class="lg:divider lg:divider-horizontal"></div>
+			<AnimBoard boards={boardSmileFace} client:visible />
+		</header>
+
+		{/* Content */}
+		<article class="flex flex-col w-full h-fit gap-8 bg-base-300">
+			{
+				Object.entries(sections).map(
+					(
+						[prop, { title, paragraph, board, extrasHTML }],
+						index,
+					) => {
+						const isEven = (index + 1) % 2 === 0;
+						return (
+							<SectionCardWithAnimBoard
+								id={prop}
+								title={title}
+								paragraph={paragraph}
+								board={board}
+								flip={isEven}
+								extrasHTML={extrasHTML}
+							/>
+						);
+					},
+				)
+			}
+		</article>
+	</FramePage>
+</Html>

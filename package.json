@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "name": "tic-tac-toe-v2",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start:build": "astro check && astro build && astro preview --host",
+    "build": "astro check && astro build",
+    "start": "astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^3.0.9",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.2.3",
+    "js-confetti": "^0.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@astrojs/check": "^0.4.1",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.17",
+    "cssnano": "^6.0.3",
+    "typescript": "^5.3.3"
+  }
+}

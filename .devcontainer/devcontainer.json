@@ -1,0 +1,22 @@
+{
+	"name": "tic-tac-toe-world-web",
+	"dockerFile": "./Dockerfile",
+	"context": "..",
+	"appPort": "8081:8081",
+	"postCreateCommand": "bun install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"ms-azuretools.vscode-docker",
+				"oven.bun-vscode",
+				"dsznajder.es7-react-js-snippets",
+				"bradlc.vscode-tailwindcss",
+				"mintlify.document",
+				"astro-build.astro-vscode",
+				"usernamehw.errorlens",
+				"Gruntfuggly.todo-tree"
+			]
+		}
+	}
+}

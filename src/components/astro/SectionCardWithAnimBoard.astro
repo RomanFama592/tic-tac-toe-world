@@ -1,0 +1,54 @@
+---
+import { slide } from "astro:transitions";
+import type { BoardType } from "@/assets/types/types";
+import AnimBoard from "@/components/react/AnimBoard";
+
+interface Props {
+    id?: string;
+    title?: string;
+    paragraph?: string;
+    board?: BoardType[];
+    flip?: boolean;
+    extrasHTML?: string | undefined;
+}
+
+const { id, title, paragraph, board, flip, extrasHTML }: Props = Astro.props;
+---
+
+<section
+    class={`shadow-lg p-10 bg-base-200 rounded-md flex ${
+        flip ? "lg:flex-row-reverse" : "lg:flex-row"
+    } flex-col items-center`}
+>
+    <div
+        class={`flex flex-col 
+                ${
+                    flip
+                        ? "lg:text-right lg:items-end"
+                        : "lg:text-left lg:items-start"
+                }
+                size-full gap-6 text-center items-center`}
+        transition:animate={slide({ duration: "0.4s" })}
+        transition:name={"section " + id}
+    >
+        <h2
+            class="font-semibold text-xl"
+            transition:animate={slide({ duration: "0.4s" })}
+            transition:name={"section " + id + " title"}
+        >
+            {title}
+        </h2>
+        <p
+            class="lg:max-w-[45dvw] max-w-full text-pretty"
+            transition:animate={slide({ duration: "0.4s" })}
+            set:html={paragraph}
+            transition:name={"section " + id + " paragraph"}/>
+        {
+            extrasHTML && (
+                <div set:html={extrasHTML} class="flex flex-col lg:flex-row" />
+            )
+        }
+    </div>
+    <div class="divider lg:divider-horizontal divider-vertical"></div>
+    <AnimBoard boards={board || [[[null]]]} client:visible />
+</section>
