@@ -63,6 +63,20 @@ If you have a suggestion that would make this better, please fork the repo and c
 > [!IMPORTANT]
 > Use [`conventional commits`](https://www.conventionalcommits.org/) and ensure that the code passes the linter test, pull requests are not accepted without this last point.
 
+Keep in mind that every change to the website would require updating the version in the `package.json`.
+
+### versioning of the page
+
+- `format of verisoned`
+  - `MAYOR`.`MINOR`.`PATCH`
+
+### most relevant types of changes that affect versioning
+- `minor-feat`: Only used for making minor changes to existing things. update a `PATCH` version.
+- `fix`: Used when fixing a bug. update a `PATCH` version.
+- `feat`: Used when adding substantial content anywhere on the page. update a `MINOR` version.
+
+- The `MAJOR` version is only incremented when the `MINOR` version reaches 100 or there is a deep and general change across the entire page. This would only be handled by me, the repository owner.
+
 1. Fork the project.
 
 2. Clone your fork.
