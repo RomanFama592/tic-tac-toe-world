@@ -6,6 +6,9 @@
 ![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen.svg)
 [![Linting](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml/badge.svg)](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml)
 
+Don't forget to **give the project a star ⭐**.¡Thanks!
+
+
 ![vid-demo.gif](https://github.com/RomanFama592/tic-tac-toe-world/blob/master/docs/images/demo.gif?raw=true)
 
 [Try a game](https://t3-world.vercel.app/play)
@@ -56,8 +59,6 @@ npm run dev
 ## 👋 Contributions
 
 If you have a suggestion that would make this better, please fork the repo and create a Pull Request. You can also simply [open an issue](https://github.com/RomanFama592/tic-tac-toe-world/issues).
-
-Don't forget to **give the project a star ⭐!** Thanks again!.
 
 > [!IMPORTANT]
 > Use [`conventional commits`](https://www.conventionalcommits.org/) and ensure that the code passes the linter test, pull requests are not accepted without this last point.
