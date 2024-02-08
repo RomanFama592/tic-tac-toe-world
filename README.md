@@ -9,7 +9,7 @@
 
 ![Contributions? Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)
 ![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen.svg)
-[![Lint](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/eslint.yml/badge.svg)](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml)
+[![Linting](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml/badge.svg)](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml)
 
 </div>
 
