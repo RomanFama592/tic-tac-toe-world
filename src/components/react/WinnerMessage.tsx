@@ -25,7 +25,12 @@ export default function WinningModal() {
             : "") + "!"
 
     useEffect(() => {
-        if (winner !== null) {
+        if (
+            winner !== null
+            && winner !== -1
+            && winner >= 0
+            && winner < players.length
+        ) {
             confetti.addConfetti({
                 //emojis: symbols,
                 emojis: [players[winner]!.symbol]
@@ -40,7 +45,7 @@ export default function WinningModal() {
             ${winner !== null ? "left-[-15%]" : "left-[-50%]"}
             bg-base-200 border-2 rounded-lg shadow-lg
             border-current z-10 animate-pulse
-            flex flex-row p-2 gap-2 justify-end 
+            flex flex-row p-2 gap-2 justify-end items-center
             hover:left-[1%] hover:w-[50%] hover:opacity-100
             hover:justify-center hover:animate-none 
             transition-all duration-300 delay-75`}
@@ -76,7 +81,6 @@ export default function WinningModal() {
                         </>
                         : <h1 className="text-2xl font-semibold">TIE</h1>
                 }
-
             </div>
         </div>
     )
