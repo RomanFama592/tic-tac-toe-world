@@ -1,5 +1,6 @@
 ---
 import { goals, linkedIn, email, repoGithub } from "@/assets/ts/constants";
+import { version } from "../../package.json";
 ---
 
 <nav
@@ -38,7 +39,9 @@ import { goals, linkedIn, email, repoGithub } from "@/assets/ts/constants";
             <a href={goals} target="_blank" rel="noopener noreferrer">metas</a>
         </li>
         <li>
-            <a href={repoGithub} target="_blank" rel="noopener noreferrer">repositorio</a>
+            <a href={repoGithub} target="_blank" rel="noopener noreferrer"
+                >repositorio</a
+            >
         </li>
     </ul>
 </nav>
@@ -58,13 +61,16 @@ import { goals, linkedIn, email, repoGithub } from "@/assets/ts/constants";
                 >Linkedin: <br /> Román Famá</a
             >
             <a
-            href={"mailto:" + email}
-            target="_blank"
-            rel="noopener noreferrer">Email: <br /> {email}</a
+                href={"mailto:" + email}
+                target="_blank"
+                rel="noopener noreferrer">Email: <br /> {email}</a
             >
             <a href={repoGithub} target="_blank" rel="noopener noreferrer"
                 >Repositorio: <br /> tic-tac-toe-world</a
             >
         </div>
+        <h3 class="absolute bottom-0 right-0 m-3">
+            v {version}
+        </h3>
     </footer>
 </main>
