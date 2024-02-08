@@ -7,6 +7,7 @@ import {
 	boardSmileFace,
 	boardThatToMakeItDifferent,
 	boardContributions,
+	boardReportBug
 } from "@/assets/ts/anims-boards";
 import {
 	goals,
@@ -70,6 +71,22 @@ export const sections: ISections = {
 				<img src="https://contrib.rocks/image?repo=${usernameGithub}/${nameRepoGithub}" alt="contributors" />
 			</a>
 		</div>
+		`,
+	},
+	reportBug: {
+		title: "He encontrado un error. ¿Como lo reporto?",
+		paragraph: `Te lo agradezco ya que todo es una ayuda necesaria, y si ha pasado algun imprevisto, la pagina se ve mal, te ha dejado de funcionar en alguna parte o tenes alguna idea interesante para el proyecto.
+		No dudes en comunicarlo en una "issue" en nuestro repositorio de github para que alguien o yo el creador pueda solucionar o charlar ese inconveniente a medida de lo posible.
+		Lo que se te pide es que seas detallado y digas paso a paso como ocurrio ese problema, para que se pueda simular el error y asi se le pueda encontrar una solucion, o si es una idea que la detalles bien. <br/>
+		Mas adelante habra una solucion para las personas que no tengan GitHub pero por ahora se necesitara que tengas una cuenta para hacer la "issue" en el repositorio oficial.`,
+		board: boardReportBug,
+		extrasHTML: `
+		<a 
+		href="${repoGithub + "/issues/new"}"
+		target="_blank" rel="noopener noreferrer"
+		class="link">
+			...Para generar un nuevo reporte
+		</a>
 		`,
 	},
 };

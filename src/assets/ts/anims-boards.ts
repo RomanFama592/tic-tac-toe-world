@@ -137,6 +137,63 @@ export const boardContributions = [
     ],
 ]
 
+export const boardReportBug = [
+    [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+    ],
+    [
+        [null, null, 1000, 1000, 1000, null, null],
+        [null, null, 1000, null, 1000, null, null],
+        [1000, 1000, 1000, null, 1000, 1000, 1000],
+        [1000, null, null, null, null, null, 1000],
+        [1000, 1000, 1000, null, 1000, 1000, 1000],
+        [null, null, 1000, null, 1000, null, null],
+        [null, null, 1000, 1000, 1000, null, null],
+    ],
+    [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+    ],
+    [
+        [null, null, 1000, 1000, 1000, null, null],
+        [null, null, 1000, null, 1000, null, null],
+        [1000, 1000, 1000, null, 1000, 1000, 1000],
+        [1000, null, null, null, null, null, 1000],
+        [1000, 1000, 1000, null, 1000, 1000, 1000],
+        [null, null, 1000, null, 1000, null, null],
+        [null, null, 1000, 1000, 1000, null, null],
+    ],
+    [
+        [null, null, 1000, 1000, 1000, null, null],
+        [null, null, 1000, null, 1000, null, null],
+        [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+        [1000, null, 1000, 1000, 1000, null, 1000],
+        [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+        [null, null, 1000, null, 1000, null, null],
+        [null, null, 1000, 1000, 1000, null, null],
+    ],
+    [
+        [null, null, 1000, 1000, 1000, null, null],
+        [null, null, 1000, 1000, 1000, null, null],
+        [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+        [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+        [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+        [null, null, 1000, 1000, 1000, null, null],
+        [null, null, 1000, 1000, 1000, null, null],
+    ],
+]
+
 export const board7x7Empty = [
     [
         [null, null, null, null, null, null, null],
