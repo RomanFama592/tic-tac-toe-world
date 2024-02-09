@@ -4,13 +4,12 @@ import { useContext, useEffect, useMemo } from "react"
 import GameContext from "@/assets/react/contexts/GameContext"
 import { builderColorTurnVarCSS, tieValue } from "@/assets/ts/constants"
 
-export default function WinningModal() {
+export default function WinningMessage() {
     const { winner, winningPositions, winningLineLength, players } = useContext(GameContext)
 
     const confetti = useMemo(() => (new JSConfetti()), [])
     const valueColor = `var(${builderColorTurnVarCSS(winner ?? tieValue)})`
     //const symbols = useMemo(() => players.map((element) => (element.symbol)), [players])
-
 
     const multiplexWinner = useMemo(
         () => (winningPositions
