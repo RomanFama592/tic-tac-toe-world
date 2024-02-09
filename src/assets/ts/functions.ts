@@ -1,5 +1,5 @@
-import type { BoardType, PlayersType, GeneratedOptions, GridOfBoardType, SizeDeclarationBoard, PosMov, BucketType } from "@/assets/types/types.ts"
-import { movementSchema, schemaSums } from "./constants";
+import type { BoardType, PlayersType, GeneratedOptions, GridOfBoardType, SizeDeclarationBoard, BucketTypeN, PosMovN } from "@/assets/types/types.ts"
+import { movementSchemaN, schemaSumsN } from "./constants";
 
 //TODO: do tests
 
@@ -110,8 +110,8 @@ function get3x3GridOfABoard(
     return grid3x3;
 }
 
-function evalIfBucketFull(winningLineLength: number, bucket: BucketType) {
-    type keysBucket = keyof BucketType
+function evalIfBucketFull(winningLineLength: number, bucket: BucketTypeN): SizeDeclarationBoard[][] | null {
+    type keysBucket = keyof BucketTypeN
 
     const winningPlays = []
 
@@ -126,20 +126,12 @@ function evalIfBucketFull(winningLineLength: number, bucket: BucketType) {
     return winningPlays.length > 0 ? winningPlays : null
 }
 
-function searchInSchemaMovement<T extends keyof PosMov>(positionToSearch: SizeDeclarationBoard): { orientation: T; position: 0 | 1 } | null {
-    for (const orientation in movementSchema) {
-        const positions = movementSchema[orientation as T];
-        const foundPosition = positions.find(
-            ([row, col]) => (
-                row === positionToSearch[0] && col === positionToSearch[1]
-            ));
+function searchInSchemaMovement<T extends keyof PosMovN>(positionToSearch: SizeDeclarationBoard): T | null {
+    for (const orientation in movementSchemaN) {
+        const [row, col] = movementSchemaN[orientation as T];
 
-        if (foundPosition) {
-            return {
-                orientation: orientation as T,
-                position: positions.indexOf(foundPosition) as 0 | 1
-            };
-        }
+        if (row === positionToSearch[0]
+            && col === positionToSearch[1]) return orientation as T
     }
 
     return null;
@@ -150,11 +142,16 @@ export const checkWinner = (
     piecePositionAbs: SizeDeclarationBoard,
     winningLineLength: number
 ): SizeDeclarationBoard[][] | null => {
-    const bucket: BucketType = {
-        vertical: [],
-        horizontal: [],
-        diagonalLtRb: [],
-        diagonalRtLb: []
+  
+    const bucket: BucketTypeN = {
+        top: [],
+        bottom: [],
+        left: [],
+        right: [],
+        leftTop: [],
+        rightTop: [],
+        leftBottom: [],
+        rightBottom: [],
     }
 
     const mainPieceIndex: number = board[piecePositionAbs[0]]![piecePositionAbs[1]]!
@@ -162,22 +159,23 @@ export const checkWinner = (
 
     if (!grid) return null;
 
-    grid.forEach((row, indexRow) => {
-        row.forEach((borderingPiece, indexCol) => {
+    grid.forEach((row, indexLocalRow) => {
+        row.forEach((borderingPiece, indexLocalCol) => {
             //if the position piece in the loop is equal to the main piece
-            if (indexCol === 1 && indexRow === 1) return;
+
+            if (indexLocalCol === 1 && indexLocalRow === 1) return;
 
             if (borderingPiece !== mainPieceIndex) return;
 
-            const direction = searchInSchemaMovement([indexRow, indexCol]);
-            if (direction === null) return;
-            const { orientation, position } = direction
+            const orientation: keyof PosMovN | null = searchInSchemaMovement([indexLocalRow, indexLocalCol]);
+
+            if (orientation === null) return;
 
             let currentPiece: number | null | undefined = borderingPiece
 
             let currentPiecePositionAbs: SizeDeclarationBoard = [
-                piecePositionAbs[0] + schemaSums[orientation][position][0],
-                piecePositionAbs[1] + schemaSums[orientation][position][1]
+                piecePositionAbs[0] + schemaSumsN[orientation][0],
+                piecePositionAbs[1] + schemaSumsN[orientation][1]
             ]
 
             bucket[orientation].push(piecePositionAbs)
@@ -186,8 +184,8 @@ export const checkWinner = (
                 bucket[orientation].push(currentPiecePositionAbs)
 
                 currentPiecePositionAbs = [
-                    currentPiecePositionAbs[0] + schemaSums[orientation][position][0],
-                    currentPiecePositionAbs[1] + schemaSums[orientation][position][1]
+                    currentPiecePositionAbs[0] + schemaSumsN[orientation][0],
+                    currentPiecePositionAbs[1] + schemaSumsN[orientation][1]
                 ]
 
                 currentPiece = board[currentPiecePositionAbs[0]]?.[currentPiecePositionAbs[1]]
