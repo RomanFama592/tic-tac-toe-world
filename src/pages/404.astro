@@ -4,17 +4,22 @@ import FramePage from "@/layouts/FramePage.astro";
 ---
 
 <Html
-    title={Astro.url.pathname}
+    title="Pagina no encontrada"
     description=""
 >
     <FramePage>
         <div class="flex items-center justify-center size-full m-auto">
             <p class="m-5 text-2xl text-center text-pretty">
-                Lo sentimos pero <span class="p-1 bg-base-100 rounded-md font-semibold"
-                    >{Astro.url.pathname}</span
+                Lo sentimos pero <span id="pathnameSpan" class="p-1 bg-base-100 rounded-md font-semibold"
+                    >esta pagina</span
                 > no existe o ha sido eliminada. No te preocupes, tenemos muchas
                 otras cosas que ofrecerte.
             </p>
         </div>
     </FramePage>
 </Html>
+
+<script defer>
+    document.querySelector("title").innerText = document.querySelector("title").innerText + ": " + window.location.pathname
+    document.querySelector("#pathnameSpan").innerText = window.location.pathname
+</script>
