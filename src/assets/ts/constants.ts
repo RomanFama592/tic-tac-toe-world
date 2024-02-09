@@ -3,7 +3,7 @@ import type { PlayersType, PosMovN } from "../types/types";
 
 /* links */
 export const email = "famaroman@gmail.com"
-export const goals = "https://famaroman.notion.site/Tic-Tac-Toe-World-Goals-e38d5dbfee724d88a7dff6290a3d15b7?pvs=4"
+export const goals = "https://famaroman.notion.site/Tic-Tac-Toe-World-Goals-e38d5dbfee724d88a7dff6290a3d15b7"
 export const linkedIn = "http://www.linkedin.com/in/romanfama"
 
 export const usernameGithub = "RomanFama592"

@@ -6,8 +6,9 @@
 ![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-brightgreen.svg)
 [![Linting](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml/badge.svg)](https://github.com/RomanFama592/tic-tac-toe-world/actions/workflows/lint.yml)
 
-Don't forget to **give the project a star ⭐**.¡Thanks!
+Don't forget to **give the project a star ⭐** ¡Thanks!
 
+**Look at the [goals](https://famaroman.notion.site/famaroman/Tic-Tac-Toe-World-Goals-e38d5dbfee724d88a7dff6290a3d15b7) of this project**, things that will be added soon
 
 ![vid-demo.gif](https://github.com/RomanFama592/tic-tac-toe-world/blob/master/docs/images/demo.gif?raw=true)
 
