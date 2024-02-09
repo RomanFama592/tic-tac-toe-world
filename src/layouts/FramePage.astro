@@ -1,6 +1,12 @@
 ---
 import { goals, linkedIn, email, repoGithub } from "@/assets/ts/constants";
 import { version } from "../../package.json";
+
+interface Props {
+	enabledButtonBack?: boolean
+}
+
+const { enabledButtonBack = true }: Props = Astro.props;
 ---
 
 <nav
@@ -9,7 +15,7 @@ import { version } from "../../package.json";
     class="navbar sticky top-0 w-full h-[10dvh] z-20 shadow-lg bg-base-100 *:text-black justify-between lg:justify-around"
 >
     {
-        Astro.url.pathname !== "/" && (
+        enabledButtonBack && (
             <button
                 onclick="window.history.back();"
                 id="toBack"
