@@ -14,8 +14,14 @@ const { title, description = "" }: Props = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<title>{title}</title>
-		<meta name="title" content={title} />
 		<meta name="description" content={description} />
+
+		<meta property="og:title" content={title}>
+		<meta property="og:description" content={description}>
+		<meta property="og:url" content={import.meta.env.URL}>
+		<meta property="og:image" content={import.meta.env.URL +"/og-image.jpg"}>
+		<meta property="og:site_name" content={import.meta.env.URL.replace(/https?:\/\//g, "")}>
+
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
