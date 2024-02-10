@@ -3,7 +3,7 @@
 	"dockerFile": "./Dockerfile",
 	"context": "..",
 	"appPort": "8081:8081",
-	"postCreateCommand": "bun install",
+	"postCreateCommand": "bun install -D",
 	"customizations": {
 		"vscode": {
 			"extensions": [
