@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "tic-tac-toe-world",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "scripts": {
     "dev": "astro dev --host",
     "start:build": "astro check && astro build && astro preview --host",
