@@ -19,12 +19,23 @@ Don't forget to **give the project a star ⭐** ¡Thanks!
 <details open>
   <summary>📑 <strong>Contents</strong></summary>
 
+- [👨‍🏫 **Technologies**](#-technologies)
 - [👨‍🏫 **Installation**](#-installation)
 - [👋 **Contributions**](#-contributions)
 - [👨‍⚖️ **License**](#-license)
 - [📬 **Contact me**](#-contact-me)
 
 </details>
+
+<br>
+
+## 👨‍💻 Technologies
+
+- [Astro](https://astro.build/)
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Daisyui](https://daisyui.com/)
 
 <br>
 
