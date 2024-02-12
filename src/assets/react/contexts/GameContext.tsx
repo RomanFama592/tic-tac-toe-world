@@ -5,11 +5,13 @@ import { defaultPlayers } from "@/assets/ts/constants";
 interface IGameContext {
     turn: number
     winningLineLength: number
+    dropPieceMode: boolean
     winningPositions: WinningPositionsType
     players: PlayersType
     board: BoardType
     winner: WinnerType
     setTurn: (value: number) => void
+    setDropPieceMode: (value: boolean) => void
     setBoard: (value: BoardType) => void
     setWinner: (value: WinnerType) => void
     setWinningPositions: (value: WinningPositionsType) => void
@@ -28,7 +30,9 @@ const GameContext = createContext<IGameContext>({
     players: defaultPlayers,
     winner: null,
     board: [[]],
+    dropPieceMode: false,
     setTurn: () => { },
+    setDropPieceMode: () => { },
     setWinningPositions: () => { },
     setWinner: () => { },
     setBoard: () => { },
