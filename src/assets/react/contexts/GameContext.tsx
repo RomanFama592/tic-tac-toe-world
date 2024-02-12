@@ -1,22 +1,6 @@
 import { createContext } from "react";
-import type { BoardType, PlayersType, WinnerType, WinningPositionsType } from "@/assets/types/types";
 import { defaultPlayers } from "@/assets/ts/constants";
-
-interface IGameContext {
-    turn: number
-    winningLineLength: number
-    dropPieceMode: boolean
-    winningPositions: WinningPositionsType
-    players: PlayersType
-    board: BoardType
-    winner: WinnerType
-    setTurn: (value: number) => void
-    setDropPieceMode: (value: boolean) => void
-    setBoard: (value: BoardType) => void
-    setWinner: (value: WinnerType) => void
-    setWinningPositions: (value: WinningPositionsType) => void
-    resetGame: () => void
-}
+import type { IGameContext } from "@/assets/types/interfaces";
 
 /**
 * The code is creating a context object called `GameContext` using the `createContext` function from
