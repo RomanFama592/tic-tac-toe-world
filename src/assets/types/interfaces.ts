@@ -10,7 +10,6 @@ export interface IGameContext {
     board: BoardType
     winner: WinnerType
     setTurn: (value: number) => void
-    setDropPieceMode: (value: boolean) => void
     setBoard: (value: BoardType) => void
     setWinner: (value: WinnerType) => void
     setWinningPositions: (value: WinningPositionsType) => void
@@ -20,6 +19,7 @@ export interface IGameContext {
 export interface IGame {
     size?: SizeDeclarationBoard,
     winningLineLength?: number,
+    dropPieceMode?: boolean,
     players?: PlayersType,
     initialTurn?: number,
     disabledReset?: boolean,

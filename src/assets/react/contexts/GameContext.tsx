@@ -16,7 +16,6 @@ const GameContext = createContext<IGameContext>({
     board: [[]],
     dropPieceMode: false,
     setTurn: () => { },
-    setDropPieceMode: () => { },
     setWinningPositions: () => { },
     setWinner: () => { },
     setBoard: () => { },
