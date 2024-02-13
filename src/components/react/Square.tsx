@@ -1,7 +1,7 @@
 import GameContext from '@/assets/react/contexts/GameContext'
 import useDisableSquare from '@/assets/react/hooks/useDisableSquare'
 import { builderColorTurnVarCSS } from '@/assets/ts/constants'
-import type { UpdateBoardType } from '@/assets/types/types'
+import type { SizeDeclarationBoard } from '@/assets/types/types'
 import React, { useContext } from 'react'
 
 export interface ISquareProps {
@@ -9,7 +9,7 @@ export interface ISquareProps {
     indexs?: [number, number]
     color?: boolean
     disabled?: boolean
-    updateBoard?: UpdateBoardType
+    updateBoard?: (indexs: SizeDeclarationBoard) => void
 }
 
 export default function Square({
