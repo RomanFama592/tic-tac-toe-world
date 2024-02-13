@@ -13,7 +13,7 @@ export const github = "https://github.com/" + usernameGithub
 export const repoGithub = github + "/" + nameRepoGithub
 
 export const tieValue = -1
-export const tieColor = "#0f0f0f"
+export const tieColor = "#5e5d5d"
 export const sizeBoardRowsVarCSS = "--size-board-x"
 export const sizeBoardColumnsVarCSS = "--size-board-y"
 
