@@ -14,6 +14,7 @@ export default function Game({
     winningLineLength = 3,
     players = defaultPlayers,
     initialTurn = randomTurns(players),
+    fallingPieceMode = false,
     disabledReset = false,
     board
 }: IGame) {
@@ -54,6 +55,7 @@ export default function Game({
             setBoard,
             players,
             winningPositions,
+            fallingPieceMode,
             winner,
             winningLineLength,
             turn: turnState,

@@ -29,17 +29,30 @@ const generateAllTrueOptions = () => {
             return [value, true]
         })
 
+    options.valueFallingPieceMode =
+        ["si", "no"].map((value) => {
+            return [value, true]
+        })
+
     return options
 }
 
 //TODO: replace to use a Json or javascript object to make it easier to extend configurations
 // @ts-ignore
-export const generateOptions = (playersIndex: number, sizeIndex: number, winningLineLengthIndex: number) => {
+export const generateOptions = (
+    playersIndex: number,
+    sizeIndex: number,
+    fallingPieceModeIndex: number,
+    winningLineLengthIndex: number
+) => {
     const options = generateAllTrueOptions()
 
     const valuePlayers = Number(options.valuePlayers[playersIndex]![0])
     const valueSize = Number(options.valueSize[sizeIndex]![0])
-    //const valueWinningLineLength = Number(options.valueWinningLineLength[winningLineLengthIndex]![0])
+    // @ts-ignore
+    const valueWinningLineLength = Number(options.valueWinningLineLength[winningLineLengthIndex]![0])
+    // @ts-ignore
+    const valueFallingPieceMode = Boolean(options.valueFallingPieceMode[fallingPieceModeIndex]![0])
 
     options.valueSize = [
         ["3", valuePlayers <= 3],
@@ -61,6 +74,11 @@ export const generateOptions = (playersIndex: number, sizeIndex: number, winning
         ["5", valueSize >= 5],
     ];
 
+    options.valueFallingPieceMode = [
+        ["si", true],
+        ["no", true],
+    ];
+
     return options;
 };
 
@@ -77,6 +95,27 @@ export const createCopyBoard = (board: BoardType) => {
 export const checkTie = (board: BoardType): boolean => {
     return board.flat().every(square => square !== null);
 };
+
+export const piecesFalling = (
+    board: BoardType,
+    piecePositionAbs: SizeDeclarationBoard
+): { board: BoardType, indexs: SizeDeclarationBoard } => {
+    const pieceMain = board[piecePositionAbs[0]]![piecePositionAbs[1]]
+
+    let iters = 1
+
+    while (
+        board[(piecePositionAbs[0] + iters)] !== undefined
+        && board[(piecePositionAbs[0] + iters)]![piecePositionAbs[1]] === null
+    ) {
+        iters = iters + 1;
+    }
+
+    board[piecePositionAbs[0]]![piecePositionAbs[1]] = null
+    board[(piecePositionAbs[0] + iters - 1)]![piecePositionAbs[1]] = pieceMain ?? null
+
+    return { board, indexs: [(piecePositionAbs[0] + iters - 1), piecePositionAbs[1]] }
+}
 
 function get3x3GridOfABoard(
     board: BoardType,
@@ -142,7 +181,7 @@ export const checkWinner = (
     piecePositionAbs: SizeDeclarationBoard,
     winningLineLength: number
 ): SizeDeclarationBoard[][] | null => {
-  
+
     const bucket: BucketTypeN = {
         top: [],
         bottom: [],
@@ -154,7 +193,10 @@ export const checkWinner = (
         rightBottom: [],
     }
 
-    const mainPieceIndex: number = board[piecePositionAbs[0]]![piecePositionAbs[1]]!
+    const mainPiece: number = board[piecePositionAbs[0]]![piecePositionAbs[1]]!
+
+    if (mainPiece === null || mainPiece === undefined) return null
+
     const grid = get3x3GridOfABoard(board, piecePositionAbs)
 
     if (!grid) return null;
@@ -165,7 +207,7 @@ export const checkWinner = (
 
             if (indexLocalCol === 1 && indexLocalRow === 1) return;
 
-            if (borderingPiece !== mainPieceIndex) return;
+            if (borderingPiece !== mainPiece) return;
 
             const orientation: keyof PosMovN | null = searchInSchemaMovement([indexLocalRow, indexLocalCol]);
 
@@ -180,7 +222,7 @@ export const checkWinner = (
 
             bucket[orientation].push(piecePositionAbs)
 
-            while (currentPiece === mainPieceIndex) {
+            while (currentPiece === mainPiece) {
                 bucket[orientation].push(currentPiecePositionAbs)
 
                 currentPiecePositionAbs = [
