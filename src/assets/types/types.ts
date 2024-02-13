@@ -17,8 +17,6 @@ export type BoardType = (number | null)[][]
 
 export type GridOfBoardType = (number | null | undefined)[][]
 
-export type UpdateBoardType = (index: SizeDeclarationBoard) => void
-
 export type OptionsToggle = [string, boolean][];
 
 export type PosMovN = {
@@ -46,6 +44,7 @@ export type BucketTypeN = {
 export type GenerateOptionsParams = {
     valuePlayers: number;
     valueSize: number,
+    valueFallingPieceMode: number,
     valueWinningLineLength: number
 };
 

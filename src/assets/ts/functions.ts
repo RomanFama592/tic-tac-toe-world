@@ -29,17 +29,30 @@ const generateAllTrueOptions = () => {
             return [value, true]
         })
 
+    options.valueFallingPieceMode =
+        ["true", "false"].map((value) => {
+            return [value, true]
+        })
+
     return options
 }
 
 //TODO: replace to use a Json or javascript object to make it easier to extend configurations
 // @ts-ignore
-export const generateOptions = (playersIndex: number, sizeIndex: number, winningLineLengthIndex: number) => {
+export const generateOptions = (
+    playersIndex: number,
+    sizeIndex: number,
+    fallingPieceModeIndex: number,
+    winningLineLengthIndex: number
+) => {
     const options = generateAllTrueOptions()
 
     const valuePlayers = Number(options.valuePlayers[playersIndex]![0])
     const valueSize = Number(options.valueSize[sizeIndex]![0])
-    //const valueWinningLineLength = Number(options.valueWinningLineLength[winningLineLengthIndex]![0])
+    // @ts-ignore
+    const valueWinningLineLength = Number(options.valueWinningLineLength[winningLineLengthIndex]![0])
+    // @ts-ignore
+    const valueFallingPieceMode = Boolean(options.valueFallingPieceMode[fallingPieceModeIndex]![0])
 
     options.valueSize = [
         ["3", valuePlayers <= 3],
@@ -59,6 +72,11 @@ export const generateOptions = (playersIndex: number, sizeIndex: number, winning
         ["3", valueSize >= 3],
         ["4", valueSize >= 4],
         ["5", valueSize >= 5],
+    ];
+
+    options.valueFallingPieceMode = [
+        ["true", true],
+        ["false", true],
     ];
 
     return options;
@@ -176,7 +194,7 @@ export const checkWinner = (
     }
 
     const mainPiece: number = board[piecePositionAbs[0]]![piecePositionAbs[1]]!
-    
+
     if (mainPiece === null || mainPiece === undefined) return null
 
     const grid = get3x3GridOfABoard(board, piecePositionAbs)
