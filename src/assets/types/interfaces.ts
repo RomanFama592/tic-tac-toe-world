@@ -4,7 +4,7 @@ import type { BoardType, PlayersType, SizeDeclarationBoard, WinnerType, WinningP
 export interface IGameContext {
     turn: number
     winningLineLength: number
-    dropPieceMode: boolean
+    fallingPieceMode: boolean
     winningPositions: WinningPositionsType
     players: PlayersType
     board: BoardType
@@ -19,7 +19,7 @@ export interface IGameContext {
 export interface IGame {
     size?: SizeDeclarationBoard,
     winningLineLength?: number,
-    dropPieceMode?: boolean,
+    fallingPieceMode?: boolean,
     players?: PlayersType,
     initialTurn?: number,
     disabledReset?: boolean,

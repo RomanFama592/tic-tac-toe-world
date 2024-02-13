@@ -1,8 +1,8 @@
 import Square from './Square'
 import { useCallback, useContext } from 'react'
 import GameContext from '@/assets/react/contexts/GameContext'
-import { checkTie, checkWinner, createCopyBoard, nextIndex } from '@/assets/ts/functions'
-import type { BoardType, SizeDeclarationBoard, UpdateBoardType } from '@/assets/types/types'
+import { checkTie, checkWinner, createCopyBoard, nextIndex, piecesFalling } from '@/assets/ts/functions'
+import type { BoardType, SizeDeclarationBoard } from '@/assets/types/types'
 import { sizeBoardColumnsVarCSS, sizeBoardRowsVarCSS, tieValue } from '@/assets/ts/constants'
 import WinnerMessage from './WinnerMessage'
 
@@ -12,6 +12,7 @@ export default function Board() {
         players,
         winner,
         board,
+        fallingPieceMode,
         winningLineLength,
         winningPositions,
         setWinningPositions,
@@ -23,17 +24,17 @@ export default function Board() {
     const gridTemplateRows = `repeat(var(${sizeBoardRowsVarCSS}), 2fr`
     const gridTemplateColumns = `repeat(var(${sizeBoardColumnsVarCSS}), 2fr`
 
-    const checkBoard = (indexs: [number, number], board: BoardType) => {
-        const pieceswinning = checkWinner(board, indexs, winningLineLength)
+    const checkBoard = (indexs: SizeDeclarationBoard, newBoard: BoardType) => {
+        const piecesWinning = checkWinner(newBoard, indexs, winningLineLength)
 
-        if (pieceswinning !== null) {
-            setWinningPositions(pieceswinning)
+        if (piecesWinning !== null) {
+            setWinningPositions(piecesWinning)
             setWinner(turn);
             setTurn(turn);
             return;
         }
 
-        if (checkTie(board)) {
+        if (checkTie(newBoard)) {
             setWinner(tieValue);
             setTurn(tieValue);
             return;
@@ -50,15 +51,20 @@ export default function Board() {
         );
     };
 
-    const updateBoard: UpdateBoardType = useCallback((indexs) => {
-        const boardPos = board[indexs[0]]?.[indexs[1]]
+    const updateBoard = useCallback((indexs: SizeDeclarationBoard) => {
+        let newIndexs = indexs
+        const boardCurrentPiece = board[newIndexs[0]]?.[newIndexs[1]]
 
         // evaluate if there is a piece in the square or if there is a winner
-        if (boardPos || boardPos === undefined || winner) return;
+        if (boardCurrentPiece || boardCurrentPiece === undefined || winner) return;
 
-        const newBoard = createCopyBoard(board)
-
-        newBoard[indexs[0]]![indexs[1]] = turn
+        let newBoard = createCopyBoard(board)
+        
+        newBoard[newIndexs[0]]![newIndexs[1]] = turn
+        
+        if (fallingPieceMode) {
+            ({ board: newBoard, indexs: newIndexs } = piecesFalling(newBoard, newIndexs));
+        }
 
         setBoard(newBoard)
 
@@ -66,8 +72,8 @@ export default function Board() {
             nextIndex(turn, players)
         )
 
-        checkBoard(indexs, newBoard)
-    }, [turn, winner, board, players])
+        checkBoard(newIndexs, newBoard)
+    }, [turn, winner, board, players, checkBoard])
 
     return (
         <div
