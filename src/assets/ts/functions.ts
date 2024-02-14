@@ -1,5 +1,5 @@
-import type { BoardType, PlayersType, GeneratedOptions, GridOfBoardType, SizeDeclarationBoard, BucketTypeN, PosMovN } from "@/assets/types/types.ts"
-import { movementSchemaN, schemaSumsN } from "./constants";
+import type { BoardType, PlayersType, GeneratedOptions, GridOfBoardType, SizeDeclarationBoard, PosMov, BucketType } from "@/assets/types/types.ts"
+import { movementSchema, schemaSums } from "./constants";
 
 //TODO: do tests
 
@@ -124,7 +124,6 @@ function get3x3GridOfABoard(
 
     const grid3x3: GridOfBoardType = [];
 
-
     if (
         !board[0]?.length
         || initialRow < 0
@@ -149,15 +148,15 @@ function get3x3GridOfABoard(
     return grid3x3;
 }
 
-function evalIfBucketFull(winningLineLength: number, bucket: BucketTypeN): SizeDeclarationBoard[][] | null {
-    type keysBucket = keyof BucketTypeN
+function evalIfBucketFull(winningLineLength: number, bucket: BucketType): SizeDeclarationBoard[][] | null {
+    type keysBucket = keyof BucketType
 
     const winningPlays = []
 
     for (const orientation in bucket) {
         const orientationArray = bucket[orientation as keysBucket]
 
-        if (orientationArray.length >= winningLineLength) {
+        if (orientationArray.length >= winningLineLength - 1) {
             winningPlays.push(orientationArray)
         }
     }
@@ -165,15 +164,24 @@ function evalIfBucketFull(winningLineLength: number, bucket: BucketTypeN): SizeD
     return winningPlays.length > 0 ? winningPlays : null
 }
 
-function searchInSchemaMovement<T extends keyof PosMovN>(positionToSearch: SizeDeclarationBoard): T | null {
-    for (const orientation in movementSchemaN) {
-        const [row, col] = movementSchemaN[orientation as T];
+function searchInSchemaMovement<T extends keyof PosMov>(positionToSearch: SizeDeclarationBoard): { orientation: T; position: 0 | 1 } | null {
+    for (const orientation in movementSchema) {
+        const positions = movementSchema[orientation as T];
 
-        if (row === positionToSearch[0]
-            && col === positionToSearch[1]) return orientation as T
+        const foundPosition = positions.find(
+            ([row, col]) => (
+                row === positionToSearch[0] && col === positionToSearch[1]
+            ));
+
+        if (foundPosition) {
+            return {
+                orientation: orientation as T,
+                position: positions.indexOf(foundPosition) as 0 | 1
+            };
+        }
     }
 
-    return null;
+    return null
 }
 
 export const checkWinner = (
@@ -182,15 +190,11 @@ export const checkWinner = (
     winningLineLength: number
 ): SizeDeclarationBoard[][] | null => {
 
-    const bucket: BucketTypeN = {
-        top: [],
-        bottom: [],
-        left: [],
-        right: [],
-        leftTop: [],
-        rightTop: [],
-        leftBottom: [],
-        rightBottom: [],
+    const bucket: BucketType = {
+        vertical: [],
+        horizontal: [],
+        diagonalLtRb: [],
+        diagonalRtLb: []
     }
 
     const mainPiece: number = board[piecePositionAbs[0]]![piecePositionAbs[1]]!
@@ -203,31 +207,29 @@ export const checkWinner = (
 
     grid.forEach((row, indexLocalRow) => {
         row.forEach((borderingPiece, indexLocalCol) => {
-            //if the position piece in the loop is equal to the main piece
-
             if (indexLocalCol === 1 && indexLocalRow === 1) return;
 
             if (borderingPiece !== mainPiece) return;
 
-            const orientation: keyof PosMovN | null = searchInSchemaMovement([indexLocalRow, indexLocalCol]);
+            const direction = searchInSchemaMovement([indexLocalRow, indexLocalCol]);
 
-            if (orientation === null) return;
+            if (direction === null) return;
+
+            const { orientation, position } = direction
 
             let currentPiece: number | null | undefined = borderingPiece
 
             let currentPiecePositionAbs: SizeDeclarationBoard = [
-                piecePositionAbs[0] + schemaSumsN[orientation][0],
-                piecePositionAbs[1] + schemaSumsN[orientation][1]
+                piecePositionAbs[0] + schemaSums[orientation][position][0],
+                piecePositionAbs[1] + schemaSums[orientation][position][1]
             ]
-
-            bucket[orientation].push(piecePositionAbs)
 
             while (currentPiece === mainPiece) {
                 bucket[orientation].push(currentPiecePositionAbs)
 
                 currentPiecePositionAbs = [
-                    currentPiecePositionAbs[0] + schemaSumsN[orientation][0],
-                    currentPiecePositionAbs[1] + schemaSumsN[orientation][1]
+                    currentPiecePositionAbs[0] + schemaSums[orientation][position][0],
+                    currentPiecePositionAbs[1] + schemaSums[orientation][position][1]
                 ]
 
                 currentPiece = board[currentPiecePositionAbs[0]]?.[currentPiecePositionAbs[1]]
@@ -235,5 +237,13 @@ export const checkWinner = (
         })
     })
 
-    return evalIfBucketFull(winningLineLength, bucket)
+    const result = evalIfBucketFull(winningLineLength, bucket)
+
+    if (result !== null) {
+        result.forEach((_value, index, array) => {
+            array[index]?.push(piecePositionAbs)
+        })
+    }
+
+    return result
 }

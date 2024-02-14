@@ -1,4 +1,4 @@
-import type { PlayersType, PosMovN } from "../types/types";
+import type { PlayersType, PosMov } from "../types/types";
 
 
 /* links */
@@ -26,24 +26,16 @@ export const defaultPlayers: PlayersType = [
   { symbol: '🔶', color: "#ffb861" }
 ]
 
-export const movementSchemaN: PosMovN = {
-  top: [0, 1],
-  bottom: [2, 1],
-  left: [1, 0],
-  right: [1, 2],
-  leftTop:[0, 0],
-  leftBottom:[2, 0],
-  rightTop:[0, 2],
-  rightBottom:[2, 2]
+export const movementSchema: PosMov = {
+  vertical: [[0, 1], [2, 1]],
+  horizontal: [[1, 0], [1, 2]],
+  diagonalLtRb: [[0, 0], [2, 2]],
+  diagonalRtLb: [[0, 2], [2, 0]]
 }
 
-export const schemaSumsN: PosMovN = {
-  top: [-1, 0],
-  bottom: [1, 0],
-  left: [0, -1],
-  right: [0, 1],
-  leftTop:[-1, -1],
-  leftBottom:[1, -1],
-  rightTop:[-1, 1],
-  rightBottom:[1, 1]
+export const schemaSums: PosMov = {
+  vertical: [[-1, 0], [1, 0]],
+  horizontal: [[0, -1], [0, 1]],
+  diagonalLtRb: [[-1, -1], [1, 1]],
+  diagonalRtLb: [[-1, 1], [1, -1]]
 }

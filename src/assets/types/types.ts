@@ -19,26 +19,31 @@ export type GridOfBoardType = (number | null | undefined)[][]
 
 export type OptionsToggle = [string, boolean][];
 
-export type PosMovN = {
-    top: SizeDeclarationBoard,
-    bottom: SizeDeclarationBoard,
-    left: SizeDeclarationBoard,
-    right: SizeDeclarationBoard,
-    leftTop: SizeDeclarationBoard,
-    rightTop: SizeDeclarationBoard,
-    leftBottom: SizeDeclarationBoard,
-    rightBottom: SizeDeclarationBoard,
+/**
+ * orientation: [[topPos], [bottomPos]]
+ * 
+ * format: [
+ * 
+ * [topPos, topPos, topPos],
+ * 
+ * [topPos, ---X---, bottomPos],
+ * 
+ * [bottomPos, bottomPos, bottomPos],
+ * 
+ * ]
+*/
+export type PosMov = {
+    vertical: [SizeDeclarationBoard, SizeDeclarationBoard],
+    horizontal: [SizeDeclarationBoard, SizeDeclarationBoard],
+    diagonalLtRb: [SizeDeclarationBoard, SizeDeclarationBoard],
+    diagonalRtLb: [SizeDeclarationBoard, SizeDeclarationBoard]
 }
 
-export type BucketTypeN = {
-    top: SizeDeclarationBoard[],
-    bottom: SizeDeclarationBoard[],
-    left: SizeDeclarationBoard[],
-    right: SizeDeclarationBoard[],
-    leftTop: SizeDeclarationBoard[],
-    rightTop: SizeDeclarationBoard[],
-    leftBottom: SizeDeclarationBoard[],
-    rightBottom: SizeDeclarationBoard[],
+export type BucketType = {
+    vertical: SizeDeclarationBoard[],
+    horizontal: SizeDeclarationBoard[],
+    diagonalLtRb: SizeDeclarationBoard[],
+    diagonalRtLb: SizeDeclarationBoard[]
 }
 
 export type GenerateOptionsParams = {
