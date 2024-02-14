@@ -14,7 +14,7 @@ export default function WinningMessage() {
     const multiplexWinner = useMemo(
         () => (winningPositions
             ? winningPositions.reduce((prevValue, value) => {
-                return prevValue + Math.floor(value.length / winningLineLength)
+                return prevValue + Math.floor((value.length > winningLineLength ? value.length + 1 : value.length) / winningLineLength)
             }, 0)
             : 0), [winningPositions])
 
