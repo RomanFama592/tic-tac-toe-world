@@ -98,74 +98,76 @@ export const sections: ISections = {
 	description="Bienvenido a Tic Tac Toe World, donde encontrarás una versión avanzada y personalizable del clásico juego de Tic Tac Toe. Sumérgete en una experiencia de juego única y descubre emocionantes modos de juego, incluyendo tableros de hasta 7x7 y la posibilidad de concatenar líneas para hacer combos. ¡Juega ahora y disfruta de la emoción de reinventar el clásico Tic Tac Toe!">
 	<meta property="og:type" content="website" slot="head">
 	<FramePage enabledButtonBack={false}>
-		{/* Header */}
-		<header
-			class="flex flex-col lg:flex-row
-				gap-2 size-full p-3 lg:p-16
-				items-center justify-between"
-		>
-			<div
-				class="flex flex-col justify-between rounded-box mt-5
-					 lg:size-fit max-lg:w-full text-center max-lg:h-[90dvh] lg:mb-auto
-					 items-center lg:items-start"
+		<div class="flex flex-col items-center w-full *:max-w-5xl">
+			{/* Header */}
+			<header
+				class="flex flex-col lg:flex-row
+					gap-2 size-full p-3 lg:p-16
+					items-center justify-between"
 			>
 				<div
-					class="flex flex-col gap-8 lg:text-left items-center lg:items-start size-full"
+					class="flex flex-col justify-between rounded-box mt-5
+						 lg:size-fit max-lg:w-full text-center max-lg:h-[90dvh] lg:mb-auto
+						 items-center lg:items-start"
 				>
-					<h1
-						class="text-5xl text-pretty font-bold hover:text-shadow-insite hover:shadow-current"
+					<div
+						class="flex flex-col gap-8 lg:text-left items-center lg:items-start size-full"
 					>
-						¡Bienvenido a Tic Tac Toe World!
-					</h1>
-					<p
-						class="m-3
-							text-pretty font-semibold max-lg:rounded-md
-							lg:max-w-[35dvw] max-lg:max-h-52
-							max-lg:bg-base-200 max-lg:p-2
-							overflow-auto size-fit"
-					>
-						<b
-							>¿Estás listo para darle un giro emocionante al
-							clásico Tic Tac Toe?</b
+						<h1
+							class="text-5xl text-pretty font-bold hover:text-shadow-insite hover:shadow-current"
 						>
-						<br /><br /> Te presento mi Proyecto Open Source de Tic Tac
-						Toe, una versión avanzada y personalizable de este juego
-						tan querido. Sumérgete en una experiencia de juego única,
-						donde cada partida es una nueva aventura. ¡Comienza a jugar
-						ahora y descubre la emoción de jugar a Tic Tac Toe de una
-						manera totalmente diferente!
-					</p>
+							¡Bienvenido a Tic Tac Toe World!
+						</h1>
+						<p
+							class="m-3
+								text-pretty font-semibold max-lg:rounded-md
+								lg:max-w-[35dvw] max-lg:max-h-52
+								max-lg:bg-base-200 max-lg:p-2
+								overflow-auto size-fit"
+						>
+							<b
+								>¿Estás listo para darle un giro emocionante al
+								clásico Tic Tac Toe?</b
+							>
+							<br /><br /> Te presento mi Proyecto Open Source de Tic Tac
+							Toe, una versión avanzada y personalizable de este juego
+							tan querido. Sumérgete en una experiencia de juego única,
+							donde cada partida es una nueva aventura. ¡Comienza a jugar
+							ahora y descubre la emoción de jugar a Tic Tac Toe de una
+							manera totalmente diferente!
+						</p>
+					</div>
+					<a href="/play" class="btn btn-primary mx-3 my-10 size-fit"
+						>¡Juega Ahora!</a
+					>
 				</div>
-				<a href="/play" class="btn btn-primary mx-3 my-10 size-fit"
-					>¡Juega Ahora!</a
-				>
-			</div>
-			<div class="lg:divider lg:divider-horizontal"></div>
-			<AnimBoard boards={boardSmileFace} client:visible />
-		</header>
-
-		{/* Content */}
-		<article class="flex flex-col w-full h-fit gap-8 bg-base-300">
-			{
-				Object.entries(sections).map(
-					(
-						[prop, { title, paragraph, board, extrasHTML }],
-						index,
-					) => {
-						const isEven = (index + 1) % 2 === 0;
-						return (
-							<SectionCardWithAnimBoard
-								id={prop}
-								title={title}
-								paragraph={paragraph}
-								board={board}
-								flip={isEven}
-								extrasHTML={extrasHTML}
-							/>
-						);
-					},
-				)
-			}
-		</article>
+				<div class="lg:divider lg:divider-horizontal"></div>
+				<AnimBoard boards={boardSmileFace} client:visible />
+			</header>
+	
+			{/* Content */}
+			<article class="flex flex-col w-full h-fit gap-8 bg-base-300">
+				{
+					Object.entries(sections).map(
+						(
+							[prop, { title, paragraph, board, extrasHTML }],
+							index,
+						) => {
+							const isEven = (index + 1) % 2 === 0;
+							return (
+								<SectionCardWithAnimBoard
+									id={prop}
+									title={title}
+									paragraph={paragraph}
+									board={board}
+									flip={isEven}
+									extrasHTML={extrasHTML}
+								/>
+							);
+						},
+					)
+				}
+			</article>
+		</div>
 	</FramePage>
 </Html>
