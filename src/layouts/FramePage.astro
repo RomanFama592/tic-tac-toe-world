@@ -14,26 +14,28 @@ const { enabledButtonBack = true }: Props = Astro.props;
     transition:animate="slide"
     class="navbar sticky top-0 w-full h-[10dvh] z-20 shadow-lg bg-base-100 *:text-black justify-between lg:justify-around"
 >
-    {
-        enabledButtonBack && (
-            <button
-                onclick="window.history.back();"
-                id="toBack"
-                class="btn btn-ghost flex justify-center items-center size-12 p-2 text-3xl"
-            >
-                &larr;
-            </button>
-        )
-    }
-    <a draggable="false" href="/" title="Tic Tac Toe World">
-        {/* hacer que se le pueda cambiar el color al stroke */}
-        <img
-            draggable="false"
-            src="/favicon.svg"
-            class="btn btn-ghost size-12 p-1 text-base-content stroke-current"
-            alt="Tic Tac Toe World"
-        />
-    </a>
+    <div class="flex flex-row justify-center items-center gap-5">
+        {
+            enabledButtonBack && (
+                <button
+                    onclick="window.history.back();"
+                    id="toBack"
+                    class="btn btn-ghost flex justify-center items-center size-12 p-2 text-3xl"
+                >
+                    &larr;
+                </button>
+            )
+        }
+        <a draggable="false" href="/" title="Tic Tac Toe World">
+            {/* hacer que se le pueda cambiar el color al stroke */}
+            <img
+                draggable="false"
+                src="/favicon.svg"
+                class="btn btn-ghost size-12 p-1 text-base-content stroke-current"
+                alt="Tic Tac Toe World"
+            />
+        </a>
+    </div>
     {/* TODO: make the mobile version */}
     {/* TODO: when there are more internal pages, only put those */}
     <ul
